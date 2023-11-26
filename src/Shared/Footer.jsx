@@ -11,7 +11,7 @@ const Footer = () => {
                     </Link>
                     <div className="-mt-10">
                         <h3 className="md:text-2xl text-lg font-semibold mb-3">Mega Group of Industries Ltd.</h3>
-                        <p>Providing reliable tech since 2023</p>
+                        <p>Providing reliable tech since 2021</p>
                     </div>
                 </aside>
                 <nav>

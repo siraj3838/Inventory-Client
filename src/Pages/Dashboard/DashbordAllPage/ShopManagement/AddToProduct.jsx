@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Headline from "../../../../Shared/Headline";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import useAxiosPublic from "../../../../Hook/useAxiosPublic";
 import { useForm } from "react-hook-form";
-
+import moment from "moment/moment";
+import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -11,9 +13,48 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 const AddToProduct = () => {
     const { user } = useContext(AuthContext);
     const myAxios = useAxiosPublic();
+    const [manager, setManager] = useState({})
+
+
+    // manager search
+    useEffect(() => {
+        myAxios.get('/allStores')
+            .then(res => {
+                const userDatas = res.data;
+                const searchEmail = userDatas.find(userData => userData?.userEmail == user?.email && userData?.role == 'manager')
+                // console.log(searchEmail)
+                setManager(searchEmail);
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, [myAxios, user?.email])
+    // console.log(manager);
+
+
+// add to database product info
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
     const onSubmit = async (data) => {
-        console.log(data)
+        // console.log(data)
+
+        const shopId = manager?._id;
+        const shopName = manager?.shopName;
+        const userEmail = manager?.userEmail;
+        const saleCount = 0;
+        const category = data?.category;
+        const productQuantity = parseFloat(data?.productQuantity);
+        const productLocation = data?.productLocation;
+        const productName = data?.productName;
+        const date = data?.time;
+        const productDescription = data?.productDescription;
+        const discount = parseFloat(data?.discount);
+        const taxCal = data.productionCost / 100 * 7.5;
+        const productionCost = parseFloat(data?.productionCost);
+        const profitMarginParse = parseFloat(data?.profitMargin);
+        const profitMargin = productionCost / 100 * profitMarginParse
+        const sellingPrice = productionCost + taxCal + profitMargin;
+        console.log(sellingPrice);
 
         const imageFile = { image: data.image[0] }
         const res = await myAxios.post(image_hosting_api, imageFile, {
@@ -22,17 +63,50 @@ const AddToProduct = () => {
             }
         })
         if (res.data.success) {
-
+            const product = {
+                productName,
+                image: res.data.data.display_url,
+                productQuantity,
+                productLocation,
+                productionCost,
+                profitMargin,
+                discount,
+                productDescription,
+                category,
+                shopId,
+                shopName,
+                email: userEmail,
+                sellingPrice,
+                date,
+                saleCount,
+            }
+            const productRes = await myAxios.post('/allProducts', product)
+            console.log(productRes.data);
+            if(productRes.data.insertedId){
+                reset();
+                toast.success('This Product Added Successfully')
+            }
+            else if(productRes.data.message){
+                toast.error(productRes.data.message)
+            }
         }
         // console.log(res.data);
     }
     return (
         <div>
+            <Helmet>
+                <title>
+                    MGI | Dashboard | Add Product
+                </title>
+            </Helmet>
             <Headline headline={'Please Added Some Product'}></Headline>
             <div className="max-w-screen-lg mx-auto bg-[#7fabfc98] px-5 py-4 rounded-md mb-10">
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="grid md:grid-cols-2 gap-3 items-center">
+                        <div className="hidden">
+                            <input {...register("time", { required: true })} type="text" className="" value={moment().format("YYYY-MM-DD, h:mm a")} id="" />
+                        </div>
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="label-text">Product Name</span>
@@ -47,11 +121,9 @@ const AddToProduct = () => {
                             <select defaultValue={'default'} {...register('category', { required: true })}
                                 className="select select-bordered w-full">
                                 <option disabled value={'default'}>Select a category</option>
-                                <option value="salad">Salad</option>
-                                <option value="pizza">Pizza</option>
-                                <option value="soup">Soup</option>
-                                <option value="dessert">Dessert</option>
-                                <option value="drinks">Drinks</option>
+                                <option value="technology">Technology</option>
+                                <option value="food">Food</option>
+                                <option value="construction">Construction</option>
                             </select>
                         </div>
                         <div className="form-control w-full ">

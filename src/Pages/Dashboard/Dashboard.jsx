@@ -45,8 +45,8 @@ const Dashboard = () => {
             <Helmet>
                 <title>MGI | Dashboard</title>
             </Helmet>
-            <div className="flex ">
-                <div className="w-1/5 min-h-[calc(100vh-60px)] bg-[#2c6be05e]">
+            <div className="flex flex-col md:flex-row">
+                <div className="lg:w-1/5 min-h-[calc(100vh-60px)] bg-[#2c6be05e]">
                     <ul className="menu pt-3 grid grid-cols-1 text-lg font-medium">
                         <div className="flex justify-between px-5 mb-10">
                             <img className="w-20" src="https://i.ibb.co/Wyscgxg/Screenshot-2023-11-24-115135-removebg-preview.png" alt="" />
@@ -98,7 +98,7 @@ const Dashboard = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 px-5 lg:px-0">
                     <Outlet></Outlet>
                 </div>
             </div>

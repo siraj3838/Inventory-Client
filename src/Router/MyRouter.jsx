@@ -10,6 +10,7 @@ import PrivateRouter from "./PrivateRouter/PrivateRouter";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import ShopManagement from "../Pages/Dashboard/DashbordAllPage/ShopManagement/ShopManagement";
 import AddToProduct from "../Pages/Dashboard/DashbordAllPage/ShopManagement/AddToProduct";
+import UpdateProduct from "../Pages/Dashboard/DashbordAllPage/ShopManagement/UpdateProduct";
 
 const MyRouter = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const MyRouter = createBrowserRouter([
             {
                 path: 'addToProduct',
                 element: <AddToProduct></AddToProduct>
+            },
+            {
+                path: 'updateProduct/:id',
+                element: <UpdateProduct></UpdateProduct>
             }
         ]
     },
