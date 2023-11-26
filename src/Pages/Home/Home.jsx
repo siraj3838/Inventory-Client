@@ -3,7 +3,7 @@ import HomeFirstBanner from "../../Shared/HomeFirstBanner";
 import About from "../../Shared/About";
 import NewsLetter from "../../Shared/NewsLetter";
 import Contact from "../../Shared/Contact";
-import Testimonials from "../../Shared/Testimonials/Testimonials";
+import Testimonials from "../../Shared/Testimonials/Testimonials"
 
 const Home = () => {
     return (
