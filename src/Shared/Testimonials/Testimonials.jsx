@@ -59,7 +59,7 @@ const Testimonials = () => {
 
     return (
         <div>
-            <div className="divider pt-8"></div>
+            <div className="divider pt-8 pb-5"></div>
             <Headline headline={'Customer Testimonials'}></Headline>
             <div className="flex justify-center max-w-screen-md mx-auto">
                 <Swiper

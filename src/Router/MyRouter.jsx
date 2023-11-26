@@ -8,6 +8,8 @@ import CreateStore from "../Pages/CreateStore/CreateStore";
 import WatchDemo from "../Pages/WatchDemo/WatchDemo";
 import PrivateRouter from "./PrivateRouter/PrivateRouter";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import ShopManagement from "../Pages/Dashboard/DashbordAllPage/ShopManagement/ShopManagement";
+import AddToProduct from "../Pages/Dashboard/DashbordAllPage/ShopManagement/AddToProduct";
 
 const MyRouter = createBrowserRouter([
     {
@@ -44,7 +46,16 @@ const MyRouter = createBrowserRouter([
     {
         path: 'dashboard',
         element: <PrivateRouter><Dashboard></Dashboard></PrivateRouter>,
-        
+        children: [
+            {
+                path: 'shopManagement',
+                element: <ShopManagement></ShopManagement>
+            },
+            {
+                path: 'addToProduct',
+                element: <AddToProduct></AddToProduct>
+            }
+        ]
     },
 ])
 

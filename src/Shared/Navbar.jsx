@@ -2,10 +2,33 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../Hook/useAxiosPublic";
 
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [manager, setManager] = useState({})
+    const myAxios = useAxiosPublic();
+    useEffect(() => {
+        myAxios.get('/allStores')
+            .then(res => {
+                const userDatas = res.data;
+                const searchEmail = userDatas.find(userData => userData?.userEmail == user?.email && userData?.role == 'manager')
+                // console.log(searchEmail)
+                setManager(searchEmail);
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, [myAxios, user?.email])
+    // console.log(manager);
+
+
+    // const pleaseCreate = () => {
+    //     toast.error('Please Create Store First')
+    // }
+
 
     const navList = <>
         <NavLink
@@ -36,22 +59,28 @@ const Navbar = () => {
                     Register
                 </NavLink>
             </>}
-        <NavLink
+        {manager ? '' : <NavLink
             to="/createStore"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
             }
         >
             Create Store
-        </NavLink>
-        <NavLink
-            to="/dashboard"
+        </NavLink>}
+        {manager ? <NavLink
+            to="/dashboard/shopManagement"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
             }
         >
             Dashboard
         </NavLink>
+            :
+            ''
+            // <li onClick={pleaseCreate} className="border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer hover:border-b-[#2c6be0ec] hover:text-[#2c6be0ec]">
+            //     DashBoard
+            // </li>
+        }
         <NavLink
             to="https://youtu.be/vxUfuJtN-LQ?feature=shared" target="_blank"
             className={({ isActive, isPending }) =>
@@ -106,7 +135,7 @@ const Navbar = () => {
                         </Link>
                         <h2 className="text-2xl font-semibold italic text-[#22417c]">Mega Group</h2>
                         <label className="swap swap-rotate ml-5">
-                            
+
                             <input onChange={handleToggle} type="checkbox" />
 
                             <svg
