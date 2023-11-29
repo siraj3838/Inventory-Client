@@ -14,7 +14,7 @@ const ShopManagement = () => {
     useEffect(() => {
         myAxios.get(`/allProducts?email=${user?.email}`)
             .then(res => {
-                // console.log(res.data);
+                // console.log(res.data)
                 const allProducts = res.data;
                 // const managerProduct = allProducts.filter(item => item.email == user?.email)
                 setProducts(allProducts);
