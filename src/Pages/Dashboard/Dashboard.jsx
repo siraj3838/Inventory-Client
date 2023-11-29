@@ -3,13 +3,21 @@ import { FaHome } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import Footer from "../../Shared/Footer";
 import { MdManageAccounts } from "react-icons/md";
+import { BiSolidCollection } from "react-icons/bi";
+import { FaUserSecret } from "react-icons/fa6";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import toast from "react-hot-toast";
+import useManager from "../../Hook/useManager";
+import useAdmin from "../../Hook/useAdmin";
 
 const Dashboard = () => {
     // const [isManager] = useManager();
     // console.log(isManager);
+    const [manager] = useManager();
+    // console.log(manager?.email);
+    const [isAdmin] = useAdmin();
+    console.log(isAdmin);
 
     const { logOut } = useContext(AuthContext);
     const handleLoggedOut = () => {
@@ -45,11 +53,16 @@ const Dashboard = () => {
             <Helmet>
                 <title>MGI | Dashboard</title>
             </Helmet>
-            <div className="flex flex-col md:flex-row">
+            <div className="flex flex-col lg:flex-row">
                 <div className="lg:w-1/5 min-h-[calc(100vh-60px)] bg-[#2c6be05e]">
                     <ul className="menu pt-3 grid grid-cols-1 text-lg font-medium">
-                        <div className="flex justify-between px-5 mb-10">
-                            <img className="w-20" src="https://i.ibb.co/Wyscgxg/Screenshot-2023-11-24-115135-removebg-preview.png" alt="" />
+                        <div className="flex items-center justify-between px-5 mb-10">
+                            {
+                                manager ?
+                                    <img className="w-20" src="https://i.ibb.co/Wyscgxg/Screenshot-2023-11-24-115135-removebg-preview.png" alt="" />
+                                    :
+                                    <FaUserSecret className="text-5xl"></FaUserSecret>
+                            }
                             <label className="swap swap-rotate ml-5">
 
                                 <input onChange={handleToggle} type="checkbox" />
@@ -71,17 +84,89 @@ const Dashboard = () => {
                                 </svg>
                             </label>
                         </div>
-                        <li>
-                            <NavLink
-                                to="/dashboard/shopManagement"
-                                className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
-                                }
-                            >
-                                <MdManageAccounts></MdManageAccounts>  Shop Management
-                            </NavLink>
+                        {/* admin */}
+                        {
+                            isAdmin ? <>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/manageShop"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
+                                        }
+                                    >
+                                        <MdManageAccounts />  Manage Shop
+                                    </NavLink>
 
-                        </li>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/adminSalesSummary"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
+                                        }
+                                    >
+                                        <BiSolidCollection></BiSolidCollection>  Sales Summary
+                                    </NavLink>
+
+                                </li>
+                            </>
+                                :
+                                ''
+                        }
+
+
+                        {/* manager */}
+                        {
+                            manager ? <>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/shopManagement"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
+                                        }
+                                    >
+                                        <MdManageAccounts></MdManageAccounts>  Shop Manager
+                                    </NavLink>
+
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/salesCollection"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
+                                        }
+                                    >
+                                        <BiSolidCollection></BiSolidCollection>   Sales Collection
+                                    </NavLink>
+
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/salesSummary"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
+                                        }
+                                    >
+                                        <BiSolidCollection></BiSolidCollection>    Sales Summary
+                                    </NavLink>
+
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard/subscription"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
+                                        }
+                                    >
+                                        <BiSolidCollection></BiSolidCollection>    Subscription
+                                    </NavLink>
+
+                                </li>
+                            </>
+                                :
+                                ''
+                        }
+                        <div className="divider"></div>
                         <li>
                             <NavLink
                                 to="/"

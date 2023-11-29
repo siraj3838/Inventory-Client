@@ -27,7 +27,7 @@ const UpdateProduct = () => {
     }, [id, myAxios, user.email])
     console.log(id, product);
 
-    const { productName, image, productQuantity, productLocation, productionCost, profitMargin, discount, productDescription, _id} = product || {}
+    const { productName, image, productQuantity, productLocation, productionCostInt, marginValue, discount, productDescription, _id} = product || {}
 
     // update product handle
     const { register, handleSubmit } = useForm()
@@ -94,7 +94,7 @@ const UpdateProduct = () => {
                             <label className="label">
                                 <span className="label-text">Product Quantity</span>
                             </label>
-                            <input {...register("productQuantity")} defaultValue={productQuantity} type="number" placeholder="Product Quantity" className="input input-bordered w-full" />
+                            <input {...register("productQuantity")} defaultValue={productQuantity} type="text" placeholder="Product Quantity" className="input input-bordered w-full" />
 
                         </div>
                         <div className="form-control w-full ">
@@ -108,21 +108,21 @@ const UpdateProduct = () => {
                             <label className="label">
                                 <span className="label-text">Production Cost</span>
                             </label>
-                            <input {...register("productionCost")} defaultValue={productionCost} type="number" placeholder="Production Cost" className="input input-bordered w-full" />
+                            <input {...register("productionCost")} defaultValue={productionCostInt} type="text" placeholder="Production Cost" className="input input-bordered w-full" />
 
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
                                 <span className="label-text">Profit Margin <span className="font-bold">%</span></span>
                             </label>
-                            <input {...register("profitMargin")} defaultValue={profitMargin} type="number" placeholder="Profit Margin %" className="input input-bordered w-full" />
+                            <input {...register("profitMargin")} defaultValue={marginValue} type="text" placeholder="Profit Margin %" className="input input-bordered w-full" />
 
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
                                 <span className="label-text">Discount <span className="font-bold">%</span></span>
                             </label>
-                            <input {...register("discount")} defaultValue={discount} type="number" placeholder="Discount %" className="input input-bordered w-full" />
+                            <input {...register("discount")} defaultValue={discount} type="text" placeholder="Discount %" className="input input-bordered w-full" />
 
                         </div>
                         <div className="form-control w-full mb-3">

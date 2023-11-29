@@ -11,6 +11,13 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import ShopManagement from "../Pages/Dashboard/DashbordAllPage/ShopManagement/ShopManagement";
 import AddToProduct from "../Pages/Dashboard/DashbordAllPage/ShopManagement/AddToProduct";
 import UpdateProduct from "../Pages/Dashboard/DashbordAllPage/ShopManagement/UpdateProduct";
+import SalesCollection from "../Pages/Dashboard/DashbordAllPage/SalesCollection/SalesCollection";
+import CheckOut from "../Pages/Dashboard/DashbordAllPage/SalesCollection/CheckOut/CheckOut";
+import CheckOutCart from "../Pages/Dashboard/DashbordAllPage/CheckOutCart/CheckOutCart";
+import SalesSummary from "../Pages/Dashboard/DashbordAllPage/SalesSummary/SalesSummary";
+import Subscription from "../Pages/Dashboard/DashbordAllPage/Subscription/Subscription";
+import ManageShop from "../Pages/Dashboard/AdminDashboard/ManageShop/ManageShop";
+import AdminSalesSummary from "../Pages/Dashboard/AdminDashboard/AdminSalesSummary/AdminSalesSummary";
 
 const MyRouter = createBrowserRouter([
     {
@@ -59,6 +66,35 @@ const MyRouter = createBrowserRouter([
             {
                 path: 'updateProduct/:id',
                 element: <UpdateProduct></UpdateProduct>
+            },
+            {
+                path: 'salesCollection',
+                element: <SalesCollection></SalesCollection>
+            },
+            {
+                path: 'checkOutCart',
+                element: <CheckOutCart></CheckOutCart>
+            },
+            {
+                path: 'salesSummary',
+                element: <SalesSummary></SalesSummary>
+            },
+            {
+                path: 'subscription',
+                element: <Subscription></Subscription>
+            },
+            {
+                path: 'checkOut/:id',
+                element: <CheckOut></CheckOut>
+            },
+            // admin
+            {
+                path: 'manageShop',
+                element: <ManageShop></ManageShop>
+            },
+            {
+                path: 'adminSalesSummary',
+                element: <AdminSalesSummary></AdminSalesSummary>
             }
         ]
     },

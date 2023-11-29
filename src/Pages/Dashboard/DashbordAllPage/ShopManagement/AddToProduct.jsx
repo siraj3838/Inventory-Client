@@ -21,7 +21,7 @@ const AddToProduct = () => {
         myAxios.get('/allStores')
             .then(res => {
                 const userDatas = res.data;
-                const searchEmail = userDatas.find(userData => userData?.userEmail == user?.email && userData?.role == 'manager')
+                const searchEmail = userDatas.find(userData => userData?.email == user?.email && userData?.role == 'manager')
                 // console.log(searchEmail)
                 setManager(searchEmail);
 
@@ -40,21 +40,25 @@ const AddToProduct = () => {
 
         const shopId = manager?._id;
         const shopName = manager?.shopName;
-        const userEmail = manager?.userEmail;
+        const userEmail = manager?.email;
         const saleCount = 0;
         const category = data?.category;
-        const productQuantity = parseFloat(data?.productQuantity);
+        const productDescription = data?.productDescription;
         const productLocation = data?.productLocation;
         const productName = data?.productName;
+        const productQuantity = parseFloat(data?.productQuantity);
+        const productionCostInt = parseFloat(data?.productionCost);
+        const discountValue = parseFloat(data?.discount);
+        const marginValue = parseFloat(data?.profitMargin);
         const date = data?.time;
-        const productDescription = data?.productDescription;
-        const discount = parseFloat(data?.discount);
-        const taxCal = data.productionCost / 100 * 7.5;
-        const productionCost = parseFloat(data?.productionCost);
-        const profitMarginParse = parseFloat(data?.profitMargin);
-        const profitMargin = productionCost / 100 * profitMarginParse
-        const sellingPrice = productionCost + taxCal + profitMargin;
-        console.log(sellingPrice);
+        const taxCal = productionCostInt / 100 * 7.5;
+        const profitMargin = productionCostInt / 100 * marginValue;
+        const sellingPrice = productionCostInt + taxCal + profitMargin;
+        const discountDollar = sellingPrice / 100 * discountValue;
+        const productionCost = productionCostInt + taxCal;
+        const totalPrice = sellingPrice - discountDollar;
+        
+        console.log( 'cost',productionCost,totalPrice,  discountDollar, sellingPrice, productionCost, profitMargin);
 
         const imageFile = { image: data.image[0] }
         const res = await myAxios.post(image_hosting_api, imageFile, {
@@ -70,7 +74,8 @@ const AddToProduct = () => {
                 productLocation,
                 productionCost,
                 profitMargin,
-                discount,
+                discountDollar,
+                discount: discountValue,
                 productDescription,
                 category,
                 shopId,
@@ -79,9 +84,12 @@ const AddToProduct = () => {
                 sellingPrice,
                 date,
                 saleCount,
+                totalPrice,
+                productionCostInt,
+                marginValue
             }
             const productRes = await myAxios.post('/allProducts', product)
-            console.log(productRes.data);
+            // console.log(productRes.data);
             if(productRes.data.insertedId){
                 reset();
                 toast.success('This Product Added Successfully')
@@ -130,7 +138,7 @@ const AddToProduct = () => {
                             <label className="label">
                                 <span className="label-text">Product Quantity</span>
                             </label>
-                            <input {...register("productQuantity", { required: true })} type="number" placeholder="Product Quantity" className="input input-bordered w-full" />
+                            <input {...register("productQuantity", { required: true })} type="text" placeholder="Product Quantity" className="input input-bordered w-full" />
                             {errors.productQuantity && <span className="text-red-600">Product Quantity is required</span>}
                         </div>
                         <div className="form-control w-full ">
@@ -144,21 +152,21 @@ const AddToProduct = () => {
                             <label className="label">
                                 <span className="label-text">Production Cost</span>
                             </label>
-                            <input {...register("productionCost", { required: true })} type="number" placeholder="Production Cost" className="input input-bordered w-full" />
+                            <input {...register("productionCost", { required: true })} type="text" placeholder="Production Cost" className="input input-bordered w-full" />
                             {errors.productionCost && <span className="text-red-600">Production Cost is required</span>}
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
                                 <span className="label-text">Profit Margin <span className="font-bold">%</span></span>
                             </label>
-                            <input {...register("profitMargin", { required: true })} type="number" placeholder="Profit Margin %" className="input input-bordered w-full" />
+                            <input {...register("profitMargin", { required: true })} type="text" placeholder="Profit Margin %" className="input input-bordered w-full" />
                             {errors.profitMargin && <span className="text-red-600">How much profit margin do want to take?</span>}
                         </div>
                         <div className="form-control w-full ">
                             <label className="label">
                                 <span className="label-text">Discount <span className="font-bold">%</span></span>
                             </label>
-                            <input {...register("discount", { required: true })} type="number" placeholder="Discount %" className="input input-bordered w-full" />
+                            <input {...register("discount", { required: true })} type="text" placeholder="Discount %" className="input input-bordered w-full" />
                             {errors.discount && <span className="text-red-600">Please said how much Discount provide on this product?</span>}
                         </div>
 

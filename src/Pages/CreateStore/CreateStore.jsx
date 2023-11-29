@@ -4,12 +4,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 
 const CreateStore = () => {
     const { user } = useContext(AuthContext);
     const myAxios = useAxiosPublic();
+    const navigate = useNavigate();
     const createNewShop = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -20,21 +22,20 @@ const CreateStore = () => {
         const shopInfo = form.shopInfo.value;
         const shopLogo = form.shopLogo.value
 
-        const newStore = { shopName, userEmail, shopLogo, userName, shopLocation, shopInfo }
-        console.log(newStore);
+        const newStore = { shopName, email: userEmail, shopLogo, userName, shopLocation, shopInfo }
+        // console.log(newStore);
         myAxios.post('/allStores', newStore)
         .then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             if(res.data.insertedId === null){
                 return toast.error(res.data.message)
             }
             if(res.data.insertedId){
                 myAxios.patch(`/allStores/manager/${res.data.insertedId}`)
                 .then(res => {
-                    console.log(res.data)
-                    
                     if(res.data.modifiedCount > 0){
                         toast.success('Store Create Successfully')
+                        navigate('/dashboard/shopManagement')
                     }
                 })
                 .catch(err =>{

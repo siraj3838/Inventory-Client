@@ -20,7 +20,7 @@ const ShopManagement = () => {
                 setProducts(allProducts);
             })
     }, [myAxios, user?.email])
-    console.log(products);
+    // console.log(products);
 
     const deleteProduct = (id) => {
         // console.log(id);
@@ -54,10 +54,10 @@ const ShopManagement = () => {
         <div>
             <Helmet>
                 <title>
-                    MGI | Dashboard | Shop Management
+                    MGI | Dashboard | Shop Manager
                 </title>
             </Helmet>
-            <Headline headline={'Shop Management'}></Headline>
+            <Headline headline={'Shop Manager'}></Headline>
             <div className="flex justify-between max-w-screen-sm mx-auto border-y-2 border-black md:mt-12 lg:mt-0">
                 {
                     products?.length == 0 ? <h2 className="p-3">Total 0 Product Added, Please Add some Product</h2>
