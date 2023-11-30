@@ -52,26 +52,28 @@ const HomeFirstBanner = () => {
     )
 
     return (
-        <div>
+        <div data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="1500">
 
             <div ref={sliderRef} className="keen-slider max-w-screen-xl mx-auto">
                 <div className="keen-slider__slide number-slide3">
                     <img className="w-full h-[70vh]" src="https://i.ibb.co/r6nsr4V/principal-activities-mobile.jpg" alt="" />
                 </div>
                 <div className="keen-slider__slide number-slide1">
-                    <img className="w-full h-[70vh]" src="https://i.ibb.co/W2CQDRR/c18.jpg" alt="" />
+                    <img className="w-full h-[70vh]" src="https://i.ibb.co/25Vm5Kk/productbanner-rmrecommends2020-1.jpg" alt="" />
                 </div>
                 <div className="keen-slider__slide number-slide2">
                     <img className="w-full h-[70vh]" src="https://i.ibb.co/4pY5ygR/5uoi-YAw-JZ1-J6le3o9a5c-RMVz-SVc-SZ6-Ez-DQyy5-El7.png" alt="" />
                 </div>
                 <div className="keen-slider__slide number-slide6">
-                    <img className="w-full h-[70vh]" src="https://i.ibb.co/0D3rwxv/spice3.jpg" alt="" />
+                    <img className="w-full h-[70vh]" src="https://i.ibb.co/7b3JW92/maxresdefault-3.jpg" alt="" />
                 </div>
                 <div className="keen-slider__slide number-slide4">
-                    <img className="w-full h-[70vh]" src="https://i.ibb.co/qpwt6wH/oil2.jpg" alt="" />
+                    <img className="w-full h-[70vh]" src="https://i.ibb.co/dMD6wyD/Shop-Products-Social-Media-Banner-Design-Template-scaled.jpg" alt="" />
                 </div>
                 <div className="keen-slider__slide number-slide5">
-                    <img className="w-full h-[70vh]" src="https://i.ibb.co/PY46Jdd/cem2.jpg" alt="" />
+                    <img className="w-full h-[70vh]" src="https://i.ibb.co/8sBZZHn/Banner-Image-3.webp" alt="" />
                 </div>
 
 
@@ -83,19 +85,19 @@ const HomeFirstBanner = () => {
                         <img className="h-24 w-32" src="https://i.ibb.co/r6nsr4V/principal-activities-mobile.jpg" alt="" />
                     </div>
                     <div className="keen-slider__slide number-slide1">
-                        <img className="h-24 w-32" src="https://i.ibb.co/W2CQDRR/c18.jpg" alt="" />
+                        <img className="h-24 w-32" src="https://i.ibb.co/25Vm5Kk/productbanner-rmrecommends2020-1.jpg" alt="" />
                     </div>
                     <div className="keen-slider__slide number-slide2">
                         <img className="h-24 w-32" src="https://i.ibb.co/4pY5ygR/5uoi-YAw-JZ1-J6le3o9a5c-RMVz-SVc-SZ6-Ez-DQyy5-El7.png" alt="" />
                     </div>
                     <div className="keen-slider__slide number-slide6">
-                        <img className="h-24 w-32" src="https://i.ibb.co/0D3rwxv/spice3.jpg" alt="" />
+                        <img className="h-24 w-32" src="https://i.ibb.co/7b3JW92/maxresdefault-3.jpg" alt="" />
                     </div>
                     <div className="keen-slider__slide number-slide4">
-                        <img className="h-24 w-32" src="https://i.ibb.co/qpwt6wH/oil2.jpg" alt="" />
+                        <img className="h-24 w-32" src="https://i.ibb.co/dMD6wyD/Shop-Products-Social-Media-Banner-Design-Template-scaled.jpg" alt="" />
                     </div>
                     <div className="keen-slider__slide number-slide5">
-                        <img className="h-24 w-32" src="https://i.ibb.co/PY46Jdd/cem2.jpg" alt="" />
+                        <img className="h-24 w-32" src="https://i.ibb.co/8sBZZHn/Banner-Image-3.webp" alt="" />
                     </div>
 
 

@@ -12,7 +12,7 @@ const Login = () => {
     const { loggedInUser } = useContext(AuthContext)
     const navigate = useNavigate();
     const [passwordError, setPasswordError] = useState('');
-
+    
 
     const onSubmit = (data) => {
         console.log(data)
@@ -22,6 +22,7 @@ const Login = () => {
             .then(res => {
                 console.log(res.user);
                 toast.success('Register Successfully')
+                
                 navigate(location?.state ? location.state : '/');
                 reset();
             })
@@ -37,8 +38,10 @@ const Login = () => {
             </Helmet>
             <div className="my-10">
 
-                    <Headline headline={'Login Here'}></Headline>
-                <div className="max-w-lg mx-auto px-10 py-4 bg-[#FFE4DE] ">
+                <Headline headline={'Login Here'}></Headline>
+                <div data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000" className="max-w-lg mx-auto px-10 py-4 bg-[#FFE4DE] ">
                     <form onSubmit={handleSubmit(onSubmit)} className="text-[#17007D] font-medium">
 
                         <div className="form-control">

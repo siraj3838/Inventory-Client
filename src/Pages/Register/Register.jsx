@@ -26,7 +26,7 @@ const Register = () => {
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
                         const userInfo = { name: data.name, email: data.email, photoURL: data.photoURL }
-                        navigate('/');
+                        navigate('/createStore');
                         reset();
                         myAxios.post('/allUsers', userInfo)
                             .then(res => {
@@ -56,7 +56,9 @@ const Register = () => {
             <div className="my-10">
 
                 <Headline headline={'Register Here'}></Headline>
-                <div className="max-w-lg mx-auto px-10 py-4 bg-[#FFE4DE] ">
+                <div data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000" className="max-w-lg mx-auto px-10 py-4 bg-[#FFE4DE] ">
                     <form onSubmit={handleSubmit(onSubmit)} className="text-[#17007D] font-medium">
                         <div className="form-control">
                             <label className="label">

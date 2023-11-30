@@ -30,7 +30,9 @@ const NewsLetter = () => {
 
             <div className="max-w-screen-lg mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10 mt-5 px-5 lg:px-0">
                 {
-                    newsLetter.map(news => <div className="group shadow-2xl pb-2" key={news._id}>
+                    newsLetter.map(news => <div data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000" className="group shadow-2xl pb-2" key={news._id}>
                         <div
                             className='w-full relative overflow-hidden'>
                             <img

@@ -5,7 +5,6 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import CreateStore from "../Pages/CreateStore/CreateStore";
-import WatchDemo from "../Pages/WatchDemo/WatchDemo";
 import PrivateRouter from "./PrivateRouter/PrivateRouter";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import ShopManagement from "../Pages/Dashboard/DashbordAllPage/ShopManagement/ShopManagement";
@@ -18,6 +17,9 @@ import SalesSummary from "../Pages/Dashboard/DashbordAllPage/SalesSummary/SalesS
 import Subscription from "../Pages/Dashboard/DashbordAllPage/Subscription/Subscription";
 import ManageShop from "../Pages/Dashboard/AdminDashboard/ManageShop/ManageShop";
 import AdminSalesSummary from "../Pages/Dashboard/AdminDashboard/AdminSalesSummary/AdminSalesSummary";
+import ManagerRoute from "./PrivateRouter/ManagerRouter";
+import AdminRoute from "./PrivateRouter/AdminRoute";
+import PaymentCheckForm from "../Pages/Dashboard/DashbordAllPage/Subscription/PaymentCheckForm";
 
 const MyRouter = createBrowserRouter([
     {
@@ -34,11 +36,7 @@ const MyRouter = createBrowserRouter([
                 path: '/createStore',
                 element: <PrivateRouter><CreateStore></CreateStore></PrivateRouter>
             },
-            
-            {
-                path: '/watchDemo',
-                element: <WatchDemo></WatchDemo>
-            },
+        
             
 
         ]
@@ -57,44 +55,48 @@ const MyRouter = createBrowserRouter([
         children: [
             {
                 path: 'shopManagement',
-                element: <ShopManagement></ShopManagement>
+                element: <ManagerRoute><ShopManagement></ShopManagement></ManagerRoute>
             },
             {
                 path: 'addToProduct',
-                element: <AddToProduct></AddToProduct>
+                element: <ManagerRoute><AddToProduct></AddToProduct></ManagerRoute>
             },
             {
                 path: 'updateProduct/:id',
-                element: <UpdateProduct></UpdateProduct>
+                element: <ManagerRoute><UpdateProduct></UpdateProduct></ManagerRoute>
             },
             {
                 path: 'salesCollection',
-                element: <SalesCollection></SalesCollection>
+                element: <ManagerRoute><SalesCollection></SalesCollection></ManagerRoute>
             },
             {
                 path: 'checkOutCart',
-                element: <CheckOutCart></CheckOutCart>
+                element: <ManagerRoute><CheckOutCart></CheckOutCart></ManagerRoute>
             },
             {
                 path: 'salesSummary',
-                element: <SalesSummary></SalesSummary>
+                element: <ManagerRoute><SalesSummary></SalesSummary></ManagerRoute>
             },
             {
                 path: 'subscription',
-                element: <Subscription></Subscription>
+                element: <ManagerRoute><Subscription></Subscription></ManagerRoute>
             },
             {
                 path: 'checkOut/:id',
-                element: <CheckOut></CheckOut>
+                element: <ManagerRoute><CheckOut></CheckOut></ManagerRoute>
+            },
+            {
+                path: 'paymentForm/:price',
+                element: <ManagerRoute><PaymentCheckForm></PaymentCheckForm></ManagerRoute>
             },
             // admin
             {
                 path: 'manageShop',
-                element: <ManageShop></ManageShop>
+                element: <AdminRoute><ManageShop></ManageShop></AdminRoute>
             },
             {
                 path: 'adminSalesSummary',
-                element: <AdminSalesSummary></AdminSalesSummary>
+                element: <AdminRoute><AdminSalesSummary></AdminSalesSummary></AdminRoute>
             }
         ]
     },

@@ -1,0 +1,23 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "./useAxiosPublic";
+import { useContext } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
+
+const useManagerRouter = () => {
+
+    const axiosSecure = useAxiosPublic();
+
+    const {user, loading} = useContext(AuthContext)
+    const { data : isManager, isPending } = useQuery({
+        queryKey: ["member", user?.email],
+        enabled : !loading,
+        queryFn : async () =>{
+            const res = await axiosSecure.get(`/allStoreManager/${user?.email}`);
+            return res?.data?.isManager;
+        }
+    })
+
+    return [isManager, isPending];
+};
+
+export default useManagerRouter;

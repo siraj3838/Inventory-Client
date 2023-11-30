@@ -58,7 +58,9 @@ const Testimonials = () => {
 
 
     return (
-        <div>
+        <div data-aos="fade-down"
+        data-aos-easing="linear"
+        data-aos-duration="1500">
             <div className="divider pt-8 pb-5"></div>
             <Headline headline={'Customer Testimonials'}></Headline>
             <div className="flex justify-center max-w-screen-md mx-auto">

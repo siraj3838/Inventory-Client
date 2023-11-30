@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Headline from "../../Shared/Headline";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
 import toast from "react-hot-toast";
@@ -12,6 +12,17 @@ const CreateStore = () => {
     const { user } = useContext(AuthContext);
     const myAxios = useAxiosPublic();
     const navigate = useNavigate();
+    const [normalUser, setNormalUser] = useState([]);
+
+    useEffect(() => {
+        myAxios.get('/allUsers')
+            .then(res => {
+                const allData = res?.data;
+                const findUser = allData.find(item => item?.email == user?.email)
+                setNormalUser(findUser);
+            })
+    }, [myAxios, user?.email])
+    // console.log(normalUser);
     const createNewShop = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -25,27 +36,31 @@ const CreateStore = () => {
         const newStore = { shopName, email: userEmail, shopLogo, userName, shopLocation, shopInfo }
         // console.log(newStore);
         myAxios.post('/allStores', newStore)
-        .then(res => {
-            // console.log(res.data);
-            if(res.data.insertedId === null){
-                return toast.error(res.data.message)
-            }
-            if(res.data.insertedId){
-                myAxios.patch(`/allStores/manager/${res.data.insertedId}`)
-                .then(res => {
-                    if(res.data.modifiedCount > 0){
-                        toast.success('Store Create Successfully')
-                        navigate('/dashboard/shopManagement')
-                    }
-                })
-                .catch(err =>{
-                    console.log(err);
-                })
-            }
-        })
-        .catch(error =>{
-            console.log(error);
-        })
+            .then(res => {
+                // console.log(res.data);
+                if (res.data.insertedId === null) {
+                    return toast.error(res.data.message)
+                }
+                if (res.data.insertedId) {
+                    myAxios.patch(`/allStores/manager/${res.data.insertedId}`)
+                        .then(res => {
+                            if (res.data.modifiedCount > 0) {
+                                toast.success('Store Create Successfully')
+                                navigate('/dashboard/shopManagement')
+                                myAxios.patch(`/allUsersSearch/${normalUser?._id}`, newStore)
+                                    .then(res => {
+                                        console.log(res.data);
+                                    })
+                            }
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
     return (
         <div className="px-5 lg:px-0">
@@ -53,7 +68,9 @@ const CreateStore = () => {
                 <title>MGI | Create Store</title>
             </Helmet>
             <Headline headline={'Create Your Own Store'}></Headline>
-            <div className="max-w-screen-lg mx-auto bg-[#7fabfc98] px-5 py-5 rounded-md">
+            <div data-aos="flip-left"
+                data-aos-easing="ease-out-cubic"
+                data-aos-duration="2000" className="max-w-screen-lg mx-auto bg-[#7fabfc98] px-5 py-5 rounded-md">
                 <form onSubmit={createNewShop} className="text-[#000000a6] font-medium">
                     <div className="grid md:grid-cols-2 gap-4">
                         <div className="form-control w-full">
@@ -68,18 +85,6 @@ const CreateStore = () => {
                             </label>
                             <input type="text" name="userEmail" defaultValue={user?.email} readOnly className="input input-bordered w-full" />
                         </div>
-                        <div className="form-control w-full">
-                            <label className="label">
-                                <span className="">● Shop Location ●</span>
-                            </label>
-                            <input type="text" required name="shopLocation" placeholder="Shop Location Please" className="input input-bordered w-full" />
-                        </div>
-                        <div className="form-control w-full">
-                            <label className="label">
-                                <span className="">● Shop-Owner Name ●</span>
-                            </label>
-                            <input type="text" name="userName" defaultValue={user?.displayName} readOnly className="input input-bordered w-full" />
-                        </div>
 
                         <div className="form-control w-full">
                             <label className="label">
@@ -87,6 +92,19 @@ const CreateStore = () => {
                             </label>
                             <input type="text" name="shopLogo" placeholder="Type Shop Logo URL" className="input input-bordered w-full" />
                         </div>
+                        <div className="form-control w-full">
+                            <label className="label">
+                                <span className="">● Shop-Owner Name ●</span>
+                            </label>
+                            <input type="text" name="userName" defaultValue={user?.displayName} readOnly className="input input-bordered w-full" />
+                        </div>
+                        <div className="form-control w-full">
+                            <label className="label">
+                                <span className="">● Shop Location ●</span>
+                            </label>
+                            <input type="text" required name="shopLocation" placeholder="Shop Location Please" className="input input-bordered w-full" />
+                        </div>
+
                         <div className="form-control w-full">
                             <label className="label">
                                 <span className="">● Shop Info ●</span>

@@ -33,7 +33,7 @@ const AddToProduct = () => {
     // console.log(manager);
 
 
-// add to database product info
+    // add to database product info
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
     const onSubmit = async (data) => {
         // console.log(data)
@@ -57,8 +57,8 @@ const AddToProduct = () => {
         const discountDollar = sellingPrice / 100 * discountValue;
         const productionCost = productionCostInt + taxCal;
         const totalPrice = sellingPrice - discountDollar;
-        
-        console.log( 'cost',productionCost,totalPrice,  discountDollar, sellingPrice, productionCost, profitMargin);
+
+        console.log('cost', productionCost, totalPrice, discountDollar, sellingPrice, productionCost, profitMargin);
 
         const imageFile = { image: data.image[0] }
         const res = await myAxios.post(image_hosting_api, imageFile, {
@@ -90,11 +90,11 @@ const AddToProduct = () => {
             }
             const productRes = await myAxios.post('/allProducts', product)
             // console.log(productRes.data);
-            if(productRes.data.insertedId){
+            if (productRes.data.insertedId) {
                 reset();
                 toast.success('This Product Added Successfully')
             }
-            else if(productRes.data.message){
+            else if (productRes.data.message) {
                 toast.error(productRes.data.message)
             }
         }
@@ -104,11 +104,13 @@ const AddToProduct = () => {
         <div>
             <Helmet>
                 <title>
-                    MGI | Dashboard | Add Product
+                    MGI | Manager | Add Product
                 </title>
             </Helmet>
             <Headline headline={'Please Added Some Product'}></Headline>
-            <div className="max-w-screen-lg mx-auto bg-[#7fabfc98] px-5 py-4 rounded-md mb-10">
+            <div data-aos="flip-left"
+                data-aos-easing="ease-out-cubic"
+                data-aos-duration="2000" className="max-w-screen-lg mx-auto bg-[#7fabfc98] px-5 py-4 rounded-md mb-10">
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="grid md:grid-cols-2 gap-3 items-center">

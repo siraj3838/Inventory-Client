@@ -54,7 +54,7 @@ const ShopManagement = () => {
         <div>
             <Helmet>
                 <title>
-                    MGI | Dashboard | Shop Manager
+                    MGI | Manager | Shop Manager
                 </title>
             </Helmet>
             <Headline headline={'Shop Manager'}></Headline>

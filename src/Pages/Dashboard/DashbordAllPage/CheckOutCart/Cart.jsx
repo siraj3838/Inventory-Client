@@ -3,7 +3,9 @@
 const Cart = ({product}) => {
     const { productName, image, productQuantity, productLocation, productionCost, profitMargin, discountDollar, productDescription, category, shopId, shopName, email, sellingPrice, oldDate, saleCount } = product || {}
     return (
-        <div className="px-5 my-10 border-b-2 border-t-2 pb-5 shadow-xl">
+        <div data-aos="flip-left"
+        data-aos-easing="ease-out-cubic"
+        data-aos-duration="2000" className="px-5 my-10 border-b-2 border-t-2 pb-5 shadow-xl">
             <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
                 <div className="lg:col-span-2">
                     <img className="w-full md:h-40 lg:h-80" src={image} alt="" />

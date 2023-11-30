@@ -2,50 +2,67 @@ import { useEffect, useState } from "react";
 import useAxiosPublic from "../../../../Hook/useAxiosPublic";
 import Headline from "../../../../Shared/Headline";
 import UsersSection from "./UsersSection";
+import { Helmet } from "react-helmet-async";
 
 const AdminSalesSummary = () => {
     const myAxios = useAxiosPublic();
     const [totalIncome, setTotalIncome] = useState(0);
     const [totalProduct, setTotalProduct] = useState(0);
     const [totalSales, setTotalSales] = useState(0);
-    
 
 
-    useEffect(()=>{
+    useEffect(() => {
+        myAxios.get('/paymentChecks')
+            .then(res => {
+                const total = res?.data.reduce((pre, cur) => pre + cur.price, 0)
+                setTotalIncome(total)
+            })
+    }, [myAxios])
+
+    useEffect(() => {
         myAxios.get('/allProductsAdmin')
-        .then(res => {
-            setTotalProduct(res?.data?.length)
-        })
-    },[myAxios])
-    useEffect(()=>{
+            .then(res => {
+                setTotalProduct(res?.data?.length)
+            })
+    }, [myAxios])
+    useEffect(() => {
         myAxios.get('/pendingPaidAdmin')
-        .then(res => {
-            const allSales = res?.data;
-            const total = allSales.reduce((pre, cur)=> pre + cur?.totalSellingPrice, 0)
-            setTotalSales(total);
-        })
+            .then(res => {
+                const allSales = res?.data;
+                const total = allSales.reduce((pre, cur) => pre + cur?.totalSellingPrice, 0)
+                setTotalSales(total);
+            })
     }, [myAxios])
 
 
     return (
         <div>
+            <Helmet>
+                <title>MGI | Admin | Sales Summary</title>
+            </Helmet>
             <Headline headline={'Sales Summary'}></Headline>
             <div className='px-5 grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
-                <div className='bg-lime-200 flex items-center justify-evenly'>
+                <div data-aos="flip-right"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000" className='bg-lime-200 flex items-center justify-evenly'>
                     <img className='w-20' src="https://i.ibb.co/FxFBTvg/3271314-removebg-preview.png" alt="" />
                     <div className='flex flex-col gap-6 rounded-md items-center py-12'>
                         <h2 className='text-3xl font-medium'>{totalIncome}$</h2>
                         <h3 className='text-xl font-medium'>Total Income</h3>
                     </div>
                 </div>
-                <div className='bg-purple-300 flex items-center justify-evenly'>
+                <div data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000" className='bg-purple-300 flex items-center justify-evenly'>
                     <img className='w-20' src="https://i.ibb.co/z5xS7R2/3310653-removebg-preview.png" alt="" />
                     <div className='flex flex-col gap-6 rounded-md items-center py-12'>
                         <h2 className='text-3xl font-medium'>{totalProduct}</h2>
                         <h3 className='text-xl font-medium'>Total Product</h3>
                     </div>
                 </div>
-                <div className='bg-green-300 flex items-center justify-evenly'>
+                <div data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000" className='bg-green-300 flex items-center justify-evenly'>
                     <img className='w-20' src="https://i.ibb.co/3zxStsM/investing-png-image-5a3c470ba54746-224151831513899787677-removebg-preview.png" alt="" />
                     <div className=' flex flex-col gap-6 rounded-md items-center py-12'>
                         <h2 className='text-3xl font-medium'>{totalSales}$</h2>
@@ -56,12 +73,12 @@ const AdminSalesSummary = () => {
 
             </div>
             <div className="">
-                    <div className="max-w-screen-md mt-10 mb-6 mx-auto bg-[#83cfe29c] bg-opacity-50 text-[#2c6be0d7] shadow-2xl py-3 lg:py-4 px-10 rounded-tr-full rounded-bl-full ">
-                        <h2 className="text-2xl md:text-3xl lg:text-5xl font-medium  pb-4 text-center">
-                            Our All Users
-                        </h2>
-                    </div>
+                <div className="max-w-screen-md mt-10 mb-6 mx-auto bg-[#83cfe29c] bg-opacity-50 text-[#2c6be0d7] shadow-2xl py-3 lg:py-4 px-10 rounded-tr-full rounded-bl-full ">
+                    <h2 className="text-2xl md:text-3xl lg:text-5xl font-medium  pb-4 text-center">
+                        Our All Users
+                    </h2>
                 </div>
+            </div>
             <UsersSection></UsersSection>
         </div>
     );

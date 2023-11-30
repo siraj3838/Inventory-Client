@@ -27,7 +27,7 @@ const UpdateProduct = () => {
     }, [id, myAxios, user.email])
     console.log(id, product);
 
-    const { productName, image, productQuantity, productLocation, productionCostInt, marginValue, discount, productDescription, _id} = product || {}
+    const { productName, image, productQuantity, productLocation, productionCostInt, marginValue, discount, productDescription, _id } = product || {}
 
     // update product handle
     const { register, handleSubmit } = useForm()
@@ -60,10 +60,10 @@ const UpdateProduct = () => {
             }
 
             const updateRes = await myAxios.put(`/allProducts/${_id}`, product);
-            if(updateRes.data.modifiedCount > 0){
+            if (updateRes.data.modifiedCount > 0) {
                 toast.success('This Product Updated Successfully');
             }
-            else{
+            else {
                 toast.error('Sorry I think server Down');
             }
 
@@ -74,11 +74,13 @@ const UpdateProduct = () => {
         <div>
             <Helmet>
                 <title>
-                    MGI | Dashboard | Update Product
+                    MGI | Manager | Update Product
                 </title>
             </Helmet>
             <Headline headline={'Update Your Product'}></Headline>
-            <div className="max-w-screen-lg mx-auto bg-[#7fabfc98] px-5 py-4 rounded-md mb-10">
+            <div data-aos="flip-left"
+                data-aos-easing="ease-out-cubic"
+                data-aos-duration="2000" className="max-w-screen-lg mx-auto bg-[#7fabfc98] px-5 py-4 rounded-md mb-10">
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <div className="grid md:grid-cols-2 gap-3 items-center">

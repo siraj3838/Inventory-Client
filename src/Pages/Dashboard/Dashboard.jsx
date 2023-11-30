@@ -5,6 +5,8 @@ import Footer from "../../Shared/Footer";
 import { MdManageAccounts } from "react-icons/md";
 import { BiSolidCollection } from "react-icons/bi";
 import { FaUserSecret } from "react-icons/fa6";
+import { FaCalculator } from "react-icons/fa";
+import { MdOutlinePayment } from "react-icons/md";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import toast from "react-hot-toast";
@@ -17,7 +19,7 @@ const Dashboard = () => {
     const [manager] = useManager();
     // console.log(manager?.email);
     const [isAdmin] = useAdmin();
-    console.log(isAdmin);
+    // console.log(isAdmin);
 
     const { logOut } = useContext(AuthContext);
     const handleLoggedOut = () => {
@@ -147,7 +149,7 @@ const Dashboard = () => {
                                             isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
                                         }
                                     >
-                                        <BiSolidCollection></BiSolidCollection>    Sales Summary
+                                        <FaCalculator />    Sales Summary
                                     </NavLink>
 
                                 </li>
@@ -158,7 +160,7 @@ const Dashboard = () => {
                                             isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
                                         }
                                     >
-                                        <BiSolidCollection></BiSolidCollection>    Subscription
+                                        <MdOutlinePayment />    Subscription
                                     </NavLink>
 
                                 </li>

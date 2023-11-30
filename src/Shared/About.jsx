@@ -23,7 +23,7 @@ const About = () => {
                     </p>
                 </motion.div>
             </div>
-
+            <div className="divider pt-6"></div>
         </div>
     );
 };

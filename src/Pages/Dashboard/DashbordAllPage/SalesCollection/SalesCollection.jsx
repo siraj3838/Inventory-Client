@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../../Shared/Loading";
+import { Helmet } from "react-helmet-async";
 
 const SalesCollection = () => {
     const myAxios = useAxiosPublic();
@@ -14,7 +15,7 @@ const SalesCollection = () => {
     const navigate = useNavigate();
 
 
-    const { data: productsAll = [], refetch , isPending} = useQuery({
+    const { data: productsAll = [], refetch, isPending } = useQuery({
         enabled: !!user?.email,
         queryKey: ['menu', user?.email],
         queryFn: async () => {
@@ -66,6 +67,9 @@ const SalesCollection = () => {
     }
     return (
         <div className="">
+            <Helmet>
+                <title>MGI | Manager | Sales Collection</title>
+            </Helmet>
             <Headline headline={'Sales-Collection'}></Headline>
             <div className="max-w-screen-lg grid md:grid-cols-6 gap-4 items-center mx-auto bg-slate-100 mb-6">
                 <form className="col-span-5" onSubmit={handleSearch}>
@@ -91,7 +95,9 @@ const SalesCollection = () => {
                     </thead>
                     <tbody>
                         {
-                            products?.map((item) => <tr className="flex flex-col md:flex-row lg:text-lg text-base md:text-[9px] lg:justify-between text-center md:text-left" key={item._id}>
+                            products?.map((item) => <tr data-aos="flip-left"
+                            data-aos-easing="ease-out-cubic"
+                            data-aos-duration="2000" className="flex flex-col md:flex-row lg:text-lg text-base md:text-[9px] lg:justify-between text-center md:text-left" key={item._id}>
                                 <td>
                                     <hr />
                                     <div className="flex justify-center">

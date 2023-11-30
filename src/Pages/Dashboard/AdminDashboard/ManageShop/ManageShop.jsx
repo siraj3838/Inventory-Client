@@ -3,6 +3,7 @@ import Headline from "../../../../Shared/Headline";
 import useSecureAxios from "../../../../Hook/useSecureAxios";
 import { useEffect, useState } from "react";
 import { AiFillCloseSquare } from "react-icons/ai";
+import { Helmet } from "react-helmet-async";
 
 const ManageShop = () => {
     const myAxios = useSecureAxios();
@@ -15,6 +16,9 @@ const ManageShop = () => {
     }, [myAxios])
     return (
         <div>
+            <Helmet>
+                <title>MGI | Admin | Manage Shop</title>
+            </Helmet>
             <Headline headline={'All Users Information'}></Headline>
             <div className="my-10">
                 <table className="table table-zebra">
@@ -30,7 +34,9 @@ const ManageShop = () => {
                     </thead>
                     <tbody>
                         {
-                            allUsers?.map((item) => <tr className="flex flex-col md:flex-row lg:text-lg text-base md:text-[12px] md:justify-between text-center md:text-left" key={item._id}>
+                            allUsers?.map((item) => <tr data-aos="flip-left"
+                                data-aos-easing="ease-out-cubic"
+                                data-aos-duration="2000" className="flex flex-col md:flex-row lg:text-lg text-base md:text-[12px] md:justify-between text-center md:text-left" key={item._id}>
                                 <td>
                                     <hr />
                                     <div className="flex justify-center">
@@ -46,6 +52,7 @@ const ManageShop = () => {
                                     <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                                         <div className="modal-box px-10 bg-[#FFE4DE]">
                                             <div className="modal-action">
+                                                <h2 className="text-xl font-semibold pr-16">Send Promotional Email</h2>
                                                 <form method="dialog">
                                                     {/* if there is a button in form, it will close the modal */}
                                                     <button className="">
@@ -53,7 +60,7 @@ const ManageShop = () => {
                                                     </button>
                                                 </form>
                                             </div>
-                                            <form>
+                                            <form className="mt-5">
                                                 <input className="py-2 px-3 w-full mb-5 bg-base-200" type="text" placeholder="Type Here" name="adminMail" />
                                                 <input type="submit" value="Send" className="bg-blue-500 mb-5 border-r-2 border-black text-white font-semibold text-sm lg:text-lg py-1 px-2 lg:py-3 lg:px-2 hover:bg-blue-600 rounded-md w-full" />
                                             </form>

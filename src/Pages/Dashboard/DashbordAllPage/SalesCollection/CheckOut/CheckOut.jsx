@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import useAxiosPublic from "../../../../../Hook/useAxiosPublic";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../../Providers/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const CheckOut = () => {
     const { id } = useParams();
@@ -19,17 +20,20 @@ const CheckOut = () => {
                 setProducts(findData);
             })
     }, [myAxios, user?.email, id])
-    console.log(products);
+
     const { productName, image, productQuantity, productLocation, productionCost, profitMargin, discount, productDescription, category, shopId, shopName, email, sellingPrice, date, saleCount } = products || {}
     return (
         <div className="px-5 my-10">
+            <Helmet>
+                <title>MGI | Manager | Check Out</title>
+            </Helmet>
             <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
                 <div className="lg:col-span-2">
                     <img className="w-full md:h-40 lg:h-80" src={image} alt="" />
                 </div>
                 <div className="col-span-2 px-6 space-y-2">
                     <h2 className="md:text-2xl text-xl lg:text-3xl font-medium">Product Information</h2>
-                    <hr className="pb-4"/>
+                    <hr className="pb-4" />
                     <h2 className="text-xl font-medium">Product Name: {productName}</h2>
                     <h2 className="font-medium text-lg">Category: {category}</h2>
                     <h4 className="font-medium text-lg">Total Price: <span className="text-lg">{sellingPrice}$</span></h4>
@@ -39,7 +43,7 @@ const CheckOut = () => {
                     <p className="font-medium text-gray-400">Location: {productLocation}</p>
                 </div>
             </div>
-            <hr className="my-4"/>
+            <hr className="my-4" />
             <div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
                 <div className="col-span-2 border-r-2">
                     <h3 className="text-2xl font-medium mb-3 pb-2 border-b-2">Shop Owner Information</h3>

@@ -7,7 +7,9 @@ const AllProduct = ({ product, deleteProduct }) => {
     const { productName, image, productQuantity, saleCount, _id } = product || {};
 
     return (
-        <div className="col-span-1 bg-slate-100 space-y-3 rounded-md">
+        <div data-aos="flip-left"
+        data-aos-easing="ease-out-cubic"
+        data-aos-duration="2000" className="col-span-1 bg-slate-100 space-y-3 rounded-md">
             <div>
                 <img className="md:h-64 w-full rounded-t-md" src={image} alt="" />
             </div>

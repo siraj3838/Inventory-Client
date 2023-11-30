@@ -1,13 +1,24 @@
 import Headline from "../../../../Shared/Headline";
 import { FaCheckCircle } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 const Subscription = () => {
+    const basic = 10
+    const pro = 20
+    const premium = 50
     return (
         <div>
+            <Helmet>
+                <title>MGI | Manager | Subscription</title>
+            </Helmet>
             <Headline headline={'Our Spacial Offer Subscription'}></Headline>
+
             <div className="px-5 grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-white mt-5 mb-10">
-                <div className="rounded-tl-2xl rounded-bl-2xl">
+                <div data-aos="flip-right"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000" className="rounded-tl-2xl rounded-bl-2xl">
                     <div className="flex justify-center items-center py-10 bg-blue-400 rounded-2xl">
                         <div className="text-center">
                             <h5 className="md:text-xl font-medium">BASIC</h5>
@@ -36,11 +47,15 @@ const Subscription = () => {
                             <p>Weekly Bonus</p>
                         </div>
                         <div className="flex justify-center pt-6">
-                            <button className="bg-[#2c6be0ec] hover:bg-[#245dc7] font-semibold hover:scale-110 duration-600 transition-all py-4 px-3 rounded-3xl text-white">Purchase</button>
+                            <Link to={`/dashboard/paymentForm/${basic}`}>
+                                <button className="bg-[#2c6be0ec] hover:bg-[#245dc7] font-semibold hover:scale-110 duration-600 transition-all py-4 px-3 rounded-3xl text-white">Purchase</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
-                <div className="rounded-tl-2xl rounded-bl-2xl">
+                <div data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000" className="rounded-tl-2xl rounded-bl-2xl">
                     <div className="flex justify-center items-center py-10 bg-[#ffbf47] rounded-2xl">
                         <div className="text-center">
                             <h5 className="md:text-xl font-medium">PRO</h5>
@@ -69,11 +84,15 @@ const Subscription = () => {
                             <p>Weekly Bonus</p>
                         </div>
                         <div className="flex justify-center pt-6">
-                            <button className="bg-[#ffbf47] hover:bg-[#bf8f36] font-semibold hover:scale-110 duration-600 transition-all py-4 px-3 rounded-3xl text-white">Purchase</button>
+                            <Link to={`/dashboard/paymentForm/${pro}`}>
+                                <button className="bg-[#ffbf47] hover:bg-[#bf8f36] font-semibold hover:scale-110 duration-600 transition-all py-4 px-3 rounded-3xl text-white">Purchase</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
-                <div className="rounded-tl-2xl rounded-bl-2xl">
+                <div data-aos="flip-left"
+                    data-aos-easing="ease-out-cubic"
+                    data-aos-duration="2000" className="rounded-tl-2xl rounded-bl-2xl">
                     <div className="flex justify-center items-center py-10 bg-[#36c976d4] rounded-2xl">
                         <div className="text-center">
                             <h5 className="md:text-xl font-medium">PREMIUM</h5>
@@ -102,7 +121,9 @@ const Subscription = () => {
                             <p>Weekly Bonus</p>
                         </div>
                         <div className="flex justify-center pt-6">
-                            <button className="bg-[#36c976d4] hover:bg-[#46a26ed4] font-semibold hover:scale-110 duration-600 transition-all py-4 px-3 rounded-3xl text-white">Purchase</button>
+                            <Link to={`/dashboard/paymentForm/${premium}`}>
+                                <button className="bg-[#36c976d4] hover:bg-[#46a26ed4] font-semibold hover:scale-110 duration-600 transition-all py-4 px-3 rounded-3xl text-white">Purchase</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
