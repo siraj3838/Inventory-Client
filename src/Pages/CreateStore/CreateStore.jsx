@@ -1,39 +1,36 @@
 import { Helmet } from "react-helmet-async";
 import Headline from "../../Shared/Headline";
-import { useContext} from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import Loading from "../../Shared/Loading";
 
 
 
 const CreateStore = () => {
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
     const myAxios = useAxiosPublic();
     const navigate = useNavigate();
-    // const [normalUser, setNormalUser] = useState([]);
-    // /allUsersSea
-    // useEffect(() => {
-    //     myAxios.get('/allUsersSea')
-    //         .then(res => {
-    //             const allData = res?.data;
-    //             const findUser = allData.find(item => item?.email == user?.email)
-    //             setNormalUser(findUser);
-    //         })
-    // }, [myAxios, user?.email])
-    const {data: normalUser = {}} = useQuery({
-        queryKey: ['rat', user?.email],
-        queryFn: async ()=> {
+
+    const { data: normalUser = {}, refetch, isPending } = useQuery({
+        queryKey: ['money', user?.email],
+        enabled: !loading,
+        queryFn: async () => {
             const res = await myAxios.get(`/allUsersSea/${user?.email}`)
-            
-            return res.data
+            refetch();
+            return res?.data
         }
     })
-    // console.log(normalUser[0]._id);
+    console.log(normalUser[0]?._id);
 
-    const createNewShop = async (e) => {
+    // if(isPending){
+    //     // window.location.reload();
+    //     return <Loading></Loading>
+    // }
+    const createNewShop = (e) => {
         e.preventDefault();
         const form = e.target;
         const shopName = form.shopName.value;
@@ -42,6 +39,7 @@ const CreateStore = () => {
         const shopLocation = form.shopLocation.value;
         const shopInfo = form.shopInfo.value;
         const shopLogo = form.shopLogo.value
+
 
         const newStore = { shopName, email: userEmail, shopLogo, userName, shopLocation, shopInfo }
         // console.log(newStore);
@@ -52,15 +50,17 @@ const CreateStore = () => {
                     return toast.error(res.data.message)
                 }
                 if (res.data.insertedId) {
-                    myAxios.patch(`/allStores/manager/${res.data.insertedId}`)
+                    myAxios.patch(`/allStores/manager/${res?.data?.insertedId}`)
                         .then(res => {
-                            if (res.data.modifiedCount > 0) {
-                                myAxios.patch(`/allUsersSearch/${normalUser[0]._id}`, newStore)
-                                .then(res => {
-                                    toast.success('Store Create Successfully')
-                                    console.log(res.data);
-                                    navigate('/dashboard')
-                                })
+                            if (res?.data?.modifiedCount > 0) {
+                                myAxios.patch(`/allUsersSearch/${normalUser[0]?._id}`, newStore)
+                                    .then(res => {
+                                        // console.log(res.data);
+                                        if (res?.data?.modifiedCount > 0) {
+                                            toast.success('Store Create Successfully')
+                                            navigate('/dashboard')
+                                        }
+                                    })
                             }
                         })
                         .catch(err => {

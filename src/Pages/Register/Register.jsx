@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import GoogleLogin from "../../Shared/GoogleLogin";
+// import GoogleLogin from "../../Shared/GoogleLogin";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Headline from "../../Shared/Headline";
@@ -25,15 +25,13 @@ const Register = () => {
                 console.log(loggedUser);
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
-                        const userInfo = { name: data.name, email: data.email, photoURL: data.photoURL }
-                        navigate('/createStore');
+                        const userInfo = { name: data?.name, email: data?.email, photoURL: data?.photoURL }
+                        navigate('/');
                         reset();
+                        toast.success('Register Successfully')
                         myAxios.post('/allUsers', userInfo)
                             .then(res => {
-                                if (res?.data?.insertedId) {
-                                    toast.success('Register Successfully')
-
-                                }
+                                console.log(res);
                             })
 
                     })
@@ -145,8 +143,8 @@ const Register = () => {
                             <button type="submit" className="bg-[#2c6be0ec] hover:bg-[#245dc7] text-xl font-semibold hover:scale-110 duration-600 transition-all py-2 rounded-lg text-white">Register</button>
                         </div>
                     </form>
-                    <GoogleLogin></GoogleLogin>
-                    <p className="text-center mb-6">Already have an account?Please <Link to={'/login'} className="hover:text-[#2c6be0d7] text-lg font-semibold">Login</Link></p>
+                    {/* <GoogleLogin></GoogleLogin> */}
+                    <p className="text-center my-6">Already have an account?Please <Link to={'/login'} className="hover:text-[#2c6be0d7] text-lg font-semibold">Login</Link></p>
                 </div>
             </div>
         </>

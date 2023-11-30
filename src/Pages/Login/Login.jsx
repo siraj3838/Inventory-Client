@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import GoogleLogin from "../../Shared/GoogleLogin";
+// import GoogleLogin from "../../Shared/GoogleLogin";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -118,8 +118,8 @@ const Login = () => {
                             <button type="submit" className="bg-[#2c6be0ec] hover:bg-[#245dc7] text-xl font-semibold hover:scale-110 duration-600 transition-all py-2 rounded-lg text-white">Login</button>
                         </div>
                     </form>
-                    <GoogleLogin></GoogleLogin>
-                    <p className="text-center mb-6">Are You New Hare?Please <Link to={'/register'} className="hover:text-[#2c6be0d7] text-lg font-semibold">Register</Link></p>
+                    {/* <GoogleLogin></GoogleLogin> */}
+                    <p className="text-center my-6">Are You New Hare?Please <Link to={'/register'} className="hover:text-[#2c6be0d7] text-lg font-semibold">Register</Link></p>
                 </div>
             </div>
         </div>

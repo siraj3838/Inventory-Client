@@ -4,18 +4,20 @@ import { AuthContext } from "../Providers/AuthProvider";
 import toast from "react-hot-toast";
 // import useAxiosPublic from "../Hook/useAxiosPublic";
 import useAdmin from "../Hook/useAdmin";
-import useManagerRouter from "../Hook/useManagerRouter";
+// import useManagerRouter from "../Hook/useManagerRouter";
+import useManager from "../Hook/useManager";
 
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     // const [manager, setManager] = useState({})
     const [isAdmin] = useAdmin();
-    // const [manager] = useManager();
-    const [isManager] = useManagerRouter();
-    // console.log(manager?.email);
-    // console.log(isAdmin);
+    const [manager] = useManager();
+    // const [isManager] = useManagerRouter();
+    // console.log(isManager?.email);
+    console.log(manager);
 
+    
 
     const navList = <>
         <NavLink
@@ -46,7 +48,7 @@ const Navbar = () => {
                     Register
                 </NavLink>
             </>}
-        {isManager || isAdmin ? '' : <NavLink
+        {manager || isAdmin ? '' : <NavLink
             to="/createStore"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
@@ -54,7 +56,7 @@ const Navbar = () => {
         >
             Create Store
         </NavLink>}
-        {isManager && user && !isAdmin ? <NavLink
+        {manager && user && !isAdmin ? <NavLink
             to="/dashboard/shopManagement"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
@@ -66,7 +68,7 @@ const Navbar = () => {
             ''
 
         }
-        {isAdmin && user && !isManager ? <NavLink
+        {isAdmin && user && !manager ? <NavLink
             to="/dashboard/manageShop"
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "border-b-2 hover:scale-110 transition-all text-xl font-semibold hover:text-neutral-800 cursor-pointer border-b-[#2c6be0ec] text-[#2c6be0ec]" : " hover:scale-110 transition-all text-lg text-neutral-800 font-medium"
