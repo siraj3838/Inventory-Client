@@ -1,10 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import Headline from "../../Shared/Headline";
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 
 
@@ -12,17 +13,26 @@ const CreateStore = () => {
     const { user } = useContext(AuthContext);
     const myAxios = useAxiosPublic();
     const navigate = useNavigate();
-    const [normalUser, setNormalUser] = useState([]);
+    // const [normalUser, setNormalUser] = useState([]);
+    // /allUsersSea
+    // useEffect(() => {
+    //     myAxios.get('/allUsersSea')
+    //         .then(res => {
+    //             const allData = res?.data;
+    //             const findUser = allData.find(item => item?.email == user?.email)
+    //             setNormalUser(findUser);
+    //         })
+    // }, [myAxios, user?.email])
+    const {data: normalUser = {}} = useQuery({
+        queryKey: ['rat', user?.email],
+        queryFn: async ()=> {
+            const res = await myAxios.get(`/allUsersSea/${user?.email}`)
+            
+            return res.data
+        }
+    })
+    // console.log(normalUser[0]._id);
 
-    useEffect(() => {
-        myAxios.get('/allUsers')
-            .then(res => {
-                const allData = res?.data;
-                const findUser = allData.find(item => item?.email == user?.email)
-                setNormalUser(findUser);
-            })
-    }, [myAxios, user?.email])
-    // console.log(normalUser);
     const createNewShop = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -45,12 +55,12 @@ const CreateStore = () => {
                     myAxios.patch(`/allStores/manager/${res.data.insertedId}`)
                         .then(res => {
                             if (res.data.modifiedCount > 0) {
-                                toast.success('Store Create Successfully')
-                                navigate('/dashboard/shopManagement')
-                                myAxios.patch(`/allUsersSearch/${normalUser?._id}`, newStore)
-                                    .then(res => {
-                                        console.log(res.data);
-                                    })
+                                myAxios.patch(`/allUsersSearch/${normalUser[0]._id}`, newStore)
+                                .then(res => {
+                                    toast.success('Store Create Successfully')
+                                    console.log(res.data);
+                                    navigate('/dashboard')
+                                })
                             }
                         })
                         .catch(err => {

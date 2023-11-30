@@ -1,17 +1,26 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
+import useAxiosPublic from "../Hook/useAxiosPublic";
+import toast from "react-hot-toast";
 
 const GoogleLogin = () => {
     const {googleLoggedIn} = useContext(AuthContext);
     const navigate = useNavigate();
-    const from = location.state?.from?.pathname || '/';
-
+    const myAxios = useAxiosPublic();
     const handleGoogleLogin = () => {
         googleLoggedIn()
         .then(res =>{
             console.log(res.user);
-            navigate(from, { replace: true })
+            toast.success('Register Successfully')
+                                    navigate('/')
+            const userInfo = {name: res?.user?.displayName, email: res?.user?.email, photoURL: res?.user?.photoURL};
+            myAxios.post('/allUsers', userInfo)
+                            .then(res => {
+                                console.log(res.data);
+                            })
+            
+
         })
         .catch(error =>{
             console.log(error);
