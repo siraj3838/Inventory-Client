@@ -1,14 +1,14 @@
-● My Website Name: Inventory
+● My Website Name: MGI Inventory
 
 ● My Website Link: https://mgi-inventory-manage.web.app/
 
 
-1/ Our website is Item Library. You will find many entertainment Items on our web site. And if you want to Create, you must be a registered user.
+1/ In my project, if you create a new shop, then I have made functionality that allows you to go to your Dashboard.
 
-2/ We are giving you the facility, you can add your Items if you want. We have kept a nice option by clicking on add Item option, you can add Items every time. You can add the Item to any category if you want.
+2/ If you can create and add maximum 3 products in the first stage and use mongodb for storing your product data in database.
 
-3/ By clicking on our Item details you can read the Item and borrow the Item for yourself. And you can see that alone if you go to the Borrowed Items page. However, the condition is that you must fill a form and take the Item when you will return it.
+3/ We have created a functionality feature where you can edit and remove the products you have created.
 
-4/ By going to our All Items page you can see all our Items and there you can easily find the available Items. And if you are our logged in user then of course you can update many things in the Item. We have an update system on our website.
+4/ You can search your product by id and checkout. I have made the functionality to calculate the total amount of money you have profited and invested.
 
-5/ If you are a logged in user then you can give your feedback on our website, we have kept those features as well. You can also read Items on the website with dark/light theme on if you want. You will find history, drama, sci-fi, thriller etc Item category on our website.
+5/ I have created a dashboard sale summary for you where you can get all the information about the total income and the total amount sold.
