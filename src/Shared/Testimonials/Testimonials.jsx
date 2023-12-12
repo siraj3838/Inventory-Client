@@ -132,6 +132,7 @@ const Testimonials = () => {
                 </Swiper>
             </div>
             <div className="mt-14 px-5 lg:px-0">
+                {/* Testimonials form */}
                 <h2 className="text-3xl font-semibold text-[#2c6be0d7] text-center mb-7">SAY SOMETHING!</h2>
                 <div className="bg-blue-200 max-w-screen-md mx-auto p-5 rounded-md">
                     <form onSubmit={userFeedBack}>
