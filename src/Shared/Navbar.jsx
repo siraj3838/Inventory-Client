@@ -2,19 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import toast from "react-hot-toast";
-// import useAxiosPublic from "../Hook/useAxiosPublic";
 import useAdmin from "../Hook/useAdmin";
-// import useManagerRouter from "../Hook/useManagerRouter";
 import useManager from "../Hook/useManager";
 
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    // const [manager, setManager] = useState({})
     const [isAdmin] = useAdmin();
     const [manager] = useManager();
-    // const [isManager] = useManagerRouter();
-    // console.log(isManager?.email);
     console.log(manager);
 
     
@@ -130,7 +125,7 @@ const Navbar = () => {
                     </div>
                     <div className="flex items-center gap-2">
                         <Link to={'/'}>
-                            <img className="w-36 hidden md:block" src="https://i.ibb.co/CvRcvP2/MGI-Logo-removebg-preview.png" alt="" />
+                            <img className="w-24 hidden md:block" src="https://i.ibb.co/CvRcvP2/MGI-Logo-removebg-preview.png" alt="" />
                         </Link>
                         <h2 className="text-2xl font-semibold italic text-[#22417c]">Mega Group</h2>
                         <label className="swap swap-rotate ml-5">
