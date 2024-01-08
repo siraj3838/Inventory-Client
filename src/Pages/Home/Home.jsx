@@ -4,6 +4,8 @@ import About from "../../Shared/About";
 import NewsLetter from "../../Shared/NewsLetter";
 import Contact from "../../Shared/Contact";
 import Testimonials from "../../Shared/Testimonials/Testimonials";
+import OurSponsor from "../../Shared/OurSponsor";
+import Faq from "../../Shared/Faq";
 
 const Home = () => {
     return (
@@ -15,6 +17,8 @@ const Home = () => {
             <NewsLetter></NewsLetter>
             <About></About>
             <Contact></Contact>
+            <Faq></Faq>
+            <OurSponsor></OurSponsor>
             <Testimonials></Testimonials>
         </div>
     );

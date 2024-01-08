@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 const Contact = () => {
     const classes = useStyles();
     return (
-        <div>
+        <div className="hidden lg:block">
             <Headline headline={'Contact Us'}></Headline>
             <div className={classes.hero}>
                 <div className={classes.overlay}></div>
