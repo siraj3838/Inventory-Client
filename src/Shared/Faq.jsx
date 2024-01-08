@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const Faq = () => {
     return (
         <div className="px-5 lg:px-0">
+            {/* our FAQ */}
             <div className="divider py-4"></div>
             <Headline headline={'FAQ'}></Headline>
             <div className="grid lg:grid-cols-2 gap-6 max-w-screen-xl mx-auto">
