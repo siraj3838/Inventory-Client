@@ -6,6 +6,7 @@ import Contact from "../../Shared/Contact";
 import Testimonials from "../../Shared/Testimonials/Testimonials";
 import OurSponsor from "../../Shared/OurSponsor";
 import Faq from "../../Shared/Faq";
+import OurBrand from "../../Shared/OurBrand";
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             </Helmet>
             <HomeFirstBanner></HomeFirstBanner>
             <NewsLetter></NewsLetter>
+            <OurBrand></OurBrand>
             <About></About>
             <Contact></Contact>
             <Faq></Faq>
